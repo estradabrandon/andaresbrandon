@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <!-- Bloqueamos el zoom automático en móviles para que parezca una app nativa -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DASHBOARD | Registro de Dispositivos</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    /* === RESETEO ESTRICTO PARA EVITAR SCROLL HORIZONTAL === */
+    *, *::before, *::after { box-sizing: border-box !important; }
+    html, body { 
+      overflow-x: hidden !important; 
+      width: 100% !important; 
+      max-width: 100vw !important; 
+      margin: 0; 
+      padding: 0; 
+      
+    }
+/* === AJUSTES DEL ENCABEZADO (TOPBAR) === */
+.topbar {
+        position: relative !important; /* Lo ancla al inicio del documento para que suba al hacer scroll */
+        background: transparent !important;
+        border: none !important;
+    }
+    .topbar .brand {
+        opacity: 1 !important;
+    }
+    .topbar .brand-title, .topbar .brand-text {
+        color: #000000 !important;
+    }
+    .dash-container {
+        margin-top: 30px !important; /* Reduce el margen superior ya que el encabezado dejó de flotar */
+    }
+
+    /* Sobrescribe las reglas móviles para que el encabezado también se desplace en celulares */
+    @media (max-width: 768px) {
+        .topbar {
+            position: relative !important;
+        }
+        .dash-container {
+            margin-top: 20px !important; 
+        }
+    }
+    .topbar .brand {
+        opacity: 1 !important; /* Hacemos visible el logotipo */
+    }
+    .topbar .brand-title, .topbar .brand-text {
+        color: #000000 !important; /* Color negro para que se vea en el fondo blanco */
+    }
+    .dash-container {
+        margin-top: 100px !important; /* Da un poco más de espacio arriba */
+    }
+
+    .dash-container { max-width: 1100px; margin: 90px auto 40px auto; padding: 0 20px; font-family: 'Inter', sans-serif; }
+    
+    .nav-tabs-custom { border-bottom: 1px solid rgba(255,255,255,0.1); gap: 15px; }
+    
+    .nav-tabs-custom .nav-link,
+    .nav-tabs-custom .nav-link:focus,
+    .nav-tabs-custom .nav-link:hover {
+      color: #888 !important;
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
+      border-bottom: 2px solid transparent !important;
+      font-weight: 600;
+      padding: 10px 15px;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .nav-tabs-custom .nav-link.active {
+      color: #000000 !important;
+      background: transparent !important;
+      background-color: transparent !important;
+      border-bottom: 2px solid #000000 !important;
+    }
+    
+    .admin-only { display: none; }
+
+    /* === ESTILOS MASIVOS PARA TODOS LOS MODALES (Blancos y Centrados) === */
+    .modal-content {
+        background-color: #ffffff !important;
+        border: 1px solid rgba(0,0,0,0.1) !important;
+        border-radius: 14px !important;
+        color: black !important;
+    }
+    .modal-header {
+        border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+        position: relative;
+    }
+    .modal-title {
+        width: 100%;
+        text-align: center;
+        font-family: 'Playfair Display', serif !important;
+        color: black !important;
+    }
+    .modal-body {
+        text-align: center;
+        padding: 30px !important;
+    }
+    .modal .btn-close {
+        position: absolute;
+        right: 20px;
+    }
+    .modal .aco-label {
+        color: #000000 !important;
+        margin-bottom: 5px;
+    }
+    .modal .form-control, .modal select {
+        background: transparent !important;
+        color: black !important;
+        border: none !important;
+        border-bottom: 1px solid rgba(0,0,0,0.2) !important;
+        border-radius: 0 !important;
+        padding: 5px !important;
+        width: 50% !important;
+        min-width: 130px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        box-shadow: none !important;
+    }
+    .modal select option {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+    .modal .form-group-centered {
+        margin-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .modal .btn-guardar {
+        width: 50% !important;
+        margin: 10px auto 0 auto !important;
+        display: block;
+    }
+
+    /* === REGLAS 100% RESPONSIVAS PARA MÓVILES === */
+    @media (max-width: 768px) {
+      .topbar {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center;
+        height: auto !important;
+        padding: 15px 10px !important;
+        width: 100% !important;
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+      }
+      
+      .topbar .brand {
+        margin-bottom: 10px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .topbar .brand-text {
+        font-size: 11px !important; 
+        white-space: normal !important;
+      }
+
+      .topbar .d-flex {
+        width: 100%;
+        justify-content: center !important;
+        flex-wrap: wrap;
+        gap: 10px !important;
+      }
+
+      .dash-container { 
+        margin-top: 130px !important; 
+        padding: 0 15px !important;
+        width: 100% !important;
+      }
+
+      .tab-pane > .d-flex {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 15px;
+      }
+
+      .tab-pane > .d-flex h3 {
+        font-size: 22px !important;
+        text-align: center;
+      }
+
+      /* Ajuste estricto de Modales en Movil */
+      .modal-dialog {
+        margin: 10px auto !important;
+        width: 95% !important;
+        max-width: 100vw !important;
+      }
+
+      .modal-content {
+        width: 100% !important;
+        padding: 0 !important;
+      }
+
+      .modal-body {
+        padding: 20px 15px !important;
+      }
+
+      /* Forzar campos en movil */
+      .modal .form-control, .modal select, .modal .btn-guardar {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      /* Tablas adaptables */
+      .cm-table th, .cm-table td {
+        font-size: 12px !important;
+        padding: 10px 5px !important;
+        white-space: nowrap; 
+      }
+    }
+    /* === CORRECCIONES DE ESPACIO: MÓVIL Y TABLAS === */
+    @media (max-width: 768px) {
+      .dash-container {
+        margin-top: 10px !important; /* Elimina el enorme hueco blanco superior */
+      }
+      .cm-table th, .cm-table td {
+        font-size: 11px !important; /* Ajusta la letra en celular para que quepa mejor */
+        padding: 8px 3px !important;
+      }
+      .topbar {
+        padding: 10px !important; 
+      }
+    }
+
+    /* Eliminar los espacios desperdiciados en las tablas */
+    .cm-table {
+      table-layout: auto !important; 
+    }
+    
+    .cm-table th, .cm-table td {
+      padding: 10px 5px !important; 
+      vertical-align: middle;
+    }
+
+    /* Obligamos a las columnas de datos cortos a usar el mínimo espacio posible */
+    .cm-table th:not(:first-child), 
+    .cm-table td:not(:first-child) {
+      width: 1%;
+      white-space: nowrap;
+      text-align: center !important;
+    }
+
+    /* Le damos todo el espacio sobrante de la pantalla al nombre del Empleado */
+    .cm-table th:first-child, 
+    .cm-table td:first-child {
+      width: auto;
+      text-align: left !important;
+      padding-left: 10px !important;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar d-flex justify-content-between align-items-center">
+    <div class="brand">
+      <span class="brand-title">PULL&BEAR</span>
+      <span class="brand-text">ANDARES 5344</span>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <span id="user-display"></span>
+      <button id="btn-cerrar-sesion" style="background: transparent; border: none; padding: 0 0 3px 0; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #000000; border-bottom: 2px solid #d32f2f; cursor: pointer; outline: none; margin: 5px 0 0 0;">Salir</button>    
+    </div>
+  </div>
+
+  <div class="dash-container">
+    
+    <!-- NAVEGACIÓN PRINCIPAL (ESCRITORIO) -->
+    <ul class="nav nav-tabs nav-tabs-custom mb-4 d-none d-md-flex" id="dashTabs" role="tablist">
+      <li class="nav-item">
+        <button class="nav-link active" id="activos-tab" data-bs-toggle="tab" data-bs-target="#tab-activos" type="button" role="tab">Registros Activos</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" id="historial-tab" data-bs-toggle="tab" data-bs-target="#tab-historial" type="button" role="tab">Historial (7 Días)</button>
+      </li>
+      <li class="nav-item admin-only">
+        <button class="nav-link" id="plantilla-tab" data-bs-toggle="tab" data-bs-target="#tab-plantilla" type="button" role="tab">Gestión Plantilla</button>
+      </li>
+      <li class="nav-item admin-only">
+        <button class="nav-link" id="dispositivos-tab" data-bs-toggle="tab" data-bs-target="#tab-dispositivos" type="button" role="tab">Gestión Equipos</button>
+      </li>
+    </ul>
+
+    <!-- MENÚ DESPLEGABLE (MÓVIL) -->
+    <div class="d-block d-md-none mb-4">
+      <select id="mobile-tab-select" class="aco-input-text w-100" style="padding: 12px; font-weight: 600; font-size: 14px; cursor: pointer; text-transform: uppercase;">
+        <option value="#tab-activos">Registros Activos</option>
+        <option value="#tab-historial">Historial (7 Días)</option>
+        <option value="#tab-plantilla" class="admin-only">Gestión Plantilla</option>
+        <option value="#tab-dispositivos" class="admin-only">Gestión Equipos</option>
+      </select>
+    </div>
+
+    <div class="tab-content">
+      <!-- PESTAÑA 1: REGISTROS ACTIVOS -->
+      <div class="tab-pane fade show active" id="tab-activos">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 24px;">Dispositivos en Uso Hoy</h3>
+          <button class="btn-guardar" data-bs-toggle="modal" data-bs-target="#asignarModal">+ Registrar Dispositivo</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="cm-table w-100">
+            <thead>
+              <tr>
+                <th>Empleado</th>
+                <th>Dispositivo</th>
+                <th>N° Equipo</th>
+                <th>Hora Asignación</th>
+                <th>Autorizador Asignación</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-activos-body">
+              <tr><td colspan="6" class="text-center text-muted py-4">Cargando registros del día...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 2: HISTORIAL DE 7 DÍAS -->
+      <div class="tab-pane fade" id="tab-historial">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; margin: 0;">Historial de Entregas</h3>
+          
+          <div class="d-flex align-items-center gap-2 w-100 w-md-auto">
+            <label class="aco-label d-none d-md-block" style="margin: 0; white-space: nowrap;">Seleccionar Día:</label>
+            <select id="select-fecha-historial" class="aco-input-text w-100" style="min-width: 180px; text-align: center;">
+            </select>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="cm-table w-100">
+            <thead>
+              <tr>
+                <th>Empleado</th>
+                <th>Dispositivo</th>
+                <th>N°</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Autorizó Reg.</th>
+                <th>Autorizó Lib.</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-historial-body">
+              <tr><td colspan="7" class="text-center text-muted py-4">Selecciona un día para consultar.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 3: ADMIN PLANTILLA -->
+      <div class="tab-pane fade" id="tab-plantilla">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; margin: 0;">Plantilla Registrada</h3>
+          <button class="btn-guardar" data-bs-toggle="modal" data-bs-target="#nuevoEmpleadoModal">+ Nuevo Empleado</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="cm-table w-100">
+            <thead>
+              <tr>
+                <th>N° Empleado</th>
+                <th>Nombre Completo</th>
+                <th>Puesto</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-plantilla-body">
+              <tr><td colspan="4" class="text-center text-muted py-4">Cargando plantilla...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 4: ADMIN EQUIPOS -->
+      <div class="tab-pane fade" id="tab-dispositivos">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; margin: 0;">Inventario de Equipos</h3>
+          <button class="btn-guardar" data-bs-toggle="modal" data-bs-target="#nuevoDispositivoModal">+ Nuevo Equipo</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="cm-table w-100">
+            <thead>
+              <tr>
+                <th>Nombre Equipo</th>
+                <th>Cantidad Total</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-dispositivos-body">
+              <tr><td colspan="3" class="text-center text-muted py-4">Cargando inventario...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL NUEVO EMPLEADO -->
+  <div class="modal fade" id="nuevoEmpleadoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Dar de Alta Empleado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-nuevo-empleado">
+            <div class="form-group-centered">
+              <label class="aco-label">N° Empleado (ID)</label>
+              <input type="number" id="new-emp-id" class="form-control" placeholder="Ej. 1122" required>
+            </div>
+            <div class="form-group-centered">
+              <label class="aco-label">Nombre(s)</label>
+              <input type="text" id="new-emp-nombre" class="form-control" placeholder="JUAN" required>
+            </div>
+            <div class="form-group-centered">
+              <label class="aco-label">Apellido(s)</label>
+              <input type="text" id="new-emp-apellido" class="form-control" placeholder="PEREZ" required>
+            </div>
+            <div class="form-group-centered">
+              <label class="aco-label">Puesto</label>
+              <select id="new-emp-puesto" class="form-control">
+                <option value="Empleado">Empleado</option>
+                <option value="Op">Op</option>
+                <option value="Encargado">Encargado</option>
+                <option value="Admin">Admin</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-guardar">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL FLUJO ASIGNACIÓN DE DISPOSITIVO -->
+  <div class="modal fade" id="asignarModal" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Asignar Dispositivo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          
+          <div id="step-auth">
+            <div class="form-group-centered">
+              <label class="aco-label">N° Empleado</label>
+              <input type="number" id="asig-emp-num" class="form-control" placeholder="112233">
+            </div>
+            <div class="form-group-centered">
+              <label class="aco-label">NIP Empleado</label>
+              <input type="password" id="asig-emp-nip" class="form-control" placeholder="" maxlength="6">
+            </div>
+            <div id="asig-auth-error" style="color: var(--red-alert); font-size: 12px; display:none;" class="mb-2"></div>
+            <button id="btn-validar-emp" class="btn-guardar">Validar</button>
+          </div>
+
+          <div id="step-first-nip" style="display: none;">
+            <p style="font-size: 13px; color: #666; font-weight: 600; margin-bottom: 20px;">Es tu primera vez ingresando. Define tu NIP de 6 dígitos:</p>
+            <div class="form-group-centered">
+              <label class="aco-label">Nuevo NIP</label>
+              <input type="password" id="new-nip-val" class="form-control" maxlength="6">
+            </div>
+            <div class="form-group-centered">
+              <label class="aco-label">Confirmar NIP</label>
+              <input type="password" id="new-nip-val2" class="form-control" maxlength="6">
+            </div>
+            <button id="btn-save-first-nip" class="btn-guardar">Establecer NIP y Continuar</button>
+          </div>
+
+          <div id="step-device" style="display: none;">
+            <div class="form-group-centered">
+              <label class="aco-label">Empleado Seleccionado</label>
+              <div id="selected-emp-name" style="font-weight: bold; color: var(--accent);"></div>
+            </div>
+            <div class="form-group-centered">
+              <label class="aco-label">Tipo de Dispositivo</label>
+              <select id="select-device-type" class="form-control"></select>
+            </div>
+            <div class="form-group-centered">
+              <label class="aco-label">Número Disponible</label>
+              <select id="select-device-num" class="form-control"></select>
+            </div>
+            
+            <div class="d-flex flex-column gap-2 mt-4 align-items-center">
+              <button id="btn-add-more-device" class="btn-guardar w-100" style="font-size: 12px; background: white; color: black;">Añadir Otro Dispositivo</button>
+              <button id="btn-finish-device" class="btn-guardar w-100" style="font-size: 12px;">Finalizar</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE LIBERACIÓN DE DISPOSITIVO -->
+  <div class="modal fade" id="liberarModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmar Liberación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p id="libera-info-txt" style="font-size: 13px; color: #666; margin-bottom: 20px;"></p>
+          <div class="form-group-centered">
+            <label class="aco-label">NIP del Empleado para Confirmar</label>
+            <input type="password" id="libera-emp-nip" class="form-control" maxlength="6">
+          </div>
+          <div id="libera-error" style="color: var(--red-alert); font-size: 12px; display:none;" class="mb-2"></div>
+          <button id="btn-confirm-liberar" class="btn-guardar">Liberar Dispositivo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL EDITAR EMPLEADO -->
+  <div class="modal fade" id="editarEmpleadoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Datos de Empleado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-editar-empleado">
+            <input type="hidden" id="edit-emp-id">
+            <div class="form-group-centered">
+              <label class="aco-label">N° Empleado</label>
+              <input type="text" id="edit-emp-id-display" class="form-control" disabled style="opacity: 0.6;">
+            </div>
+            <div class="form-group-centered">
+              <label class="aco-label">Nombre(s)</label>
+              <input type="text" id="edit-emp-nombre" class="form-control" required>
+            </div>
+            <div class="form-group-centered">
+              <label class="aco-label">Apellido(s)</label>
+              <input type="text" id="edit-emp-apellido" class="form-control" required>
+            </div>
+            <div class="form-group-centered">
+              <label class="aco-label">Puesto</label>
+              <select id="edit-emp-puesto" class="form-control">
+                <option value="Empleado">Empleado</option>
+                <option value="Op">Op</option>
+                <option value="Encargado">Encargado</option>
+                <option value="Admin">Admin</option>
+              </select>
+            </div>
+            <div class="form-check mb-4 mt-3" style="display: flex; justify-content: center; align-items: center; gap: 8px;">
+              <input class="form-check-input" type="checkbox" id="edit-emp-reset-nip" style="margin-top: 0;">
+              <label class="form-check-label" for="edit-emp-reset-nip" style="font-size: 13px; color: #666;">
+                Resetear NIP
+              </label>
+            </div>
+            <button type="submit" class="btn-guardar">Guardar Cambios</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CONFIRMAR ELIMINACIÓN -->
+  <div class="modal fade" id="confirmarEliminarModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border: 1px solid rgba(255,77,77,0.3) !important;">
+        <div class="modal-header">
+          <h5 class="modal-title" style="color: var(--red-alert) !important;">Confirmar Eliminación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p id="confirmar-eliminar-texto" style="font-size: 15px; color: #333;" class="mb-4"></p>
+          <div class="d-flex flex-column gap-2 align-items-center">
+            <button type="button" class="btn-guardar w-100" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" id="btn-confirmar-eliminar-accion" class="btn-guardar w-100" style="background: var(--red-alert) !important; color: white !important; border-color: var(--red-alert) !important;">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL NUEVO EQUIPO -->
+  <div class="modal fade" id="nuevoDispositivoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar Nuevo Equipo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-nuevo-dispositivo">
+            <div class="form-group-centered">
+              <label class="aco-label">Nombre del Dispositivo</label>
+              <input type="text" id="new-dev-nombre" class="form-control" placeholder="Ej. Terminal PDA" required>
+            </div>
+            <div class="form-group-centered">
+              <label class="aco-label">Cantidad Total</label>
+              <input type="number" id="new-dev-cantidad" class="form-control" placeholder="Ej. 5" min="1" required>
+            </div>
+            <button type="submit" class="btn-guardar">Agregar al Inventario</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL EDITAR EQUIPO -->
+  <div class="modal fade" id="editarDispositivoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Equipo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-editar-dispositivo">
+            <input type="hidden" id="edit-dev-id">
+            <div class="form-group-centered">
+              <label class="aco-label">Nombre del Dispositivo</label>
+              <input type="text" id="edit-dev-nombre" class="form-control" required>
+            </div>
+            <div class="form-group-centered">
+              <label class="aco-label">Cantidad Total</label>
+              <input type="number" id="edit-dev-cantidad" class="form-control" min="1" required>
+            </div>
+            <button type="submit" class="btn-guardar">Guardar Cambios</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIBRERÍAS DE FIREBASE -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- LÓGICA DEL DASHBOARD -->
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

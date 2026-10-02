@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>PROCESOS ANDARES 5344</title>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-title" content="Material P&B">
+  <link rel="apple-touch-icon" href="https://blackdevice.com/wp-content/uploads/2025/03/logo-pull-bear.png">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- ENLACE AL ARCHIVO CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="splash-screen">
+    <div class="splash-title">PULL&BEAR</div>
+    <div class="splash-subtitle">ANDARES 5344</div>
+  </div>
+  <div id="menu-overlay" aria-hidden="true"></div>
+
+  <div id="sidebar" aria-hidden="true">
+    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" style="color: var(--accent); margin-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px;" onclick="document.getElementById('sidebar').classList.remove('open'); document.getElementById('menu-overlay').classList.remove('show');">Iniciar Sesión</a>
+    <a href="#materialc" data-scroll-to="material">Contar material</a>
+    <a href="#section-qr" data-scroll-to="qr">Generador QR</a>
+    <a href="#manual-section" data-scroll-to="manual">Cuenta personas</a>
+    <a href="#section-analisis" data-scroll-to="analisis">Análisis Cuadro de Merma</a>
+    <a href="#section-recarga" data-scroll-to="recarga">Recarga ACO</a>
+    <a href="#section-aco" data-scroll-to="aco">Fondo Físico ACO</a>
+  </div>
+
+  <!-- SECCIÓN HERO -->
+  <div id="hero-section">
+    <div class="hero-bg"></div>
+    <h1 id="hero-text">Pull   &   Bear   Andares   5344</h1>
+  </div>
+
+  <div class="topbar" id="top">
+    <div class="brand">
+      <span class="brand-title">PULL&BEAR</span>
+      <span class="brand-text">ANDARES 5344</span>
+    </div>
+    <div id="menu-btn" role="button" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <h1 id="materialc" class="title">Material De Camión</h1>
+  <div class="season-switch-container">
+    <label class="season-switch">
+      <input type="checkbox" id="season-toggle">
+      <span class="season-slider">
+        <span class="label-verano">Verano</span>
+        <span class="label-invierno">Invierno</span>
+      </span>
+    </label>
+  </div>
+  <main class="container-xxl px-3 px-md-4">
+    <div class="tabs-wrapper">
+      <button class="tab-btn active" data-tab="total">Total</button>
+      <button class="tab-btn" data-tab="espana">España</button>
+      <button class="tab-btn" data-tab="mexico">México</button>
+    </div>
+
+    <section class="grid">
+      
+      <div class="flip-card">
+        <div class="flip-card-inner" id="inner-senora" style="transform: rotateY(0deg);">
+          
+          <article class="flip-card-face card" id="senora-total" style="transform: rotateY(0deg); display: block;">
+            <div class="photo"><img alt="Señora" src="https://static.pullandbear.net/assets/public/923e/6268/9cef48938b12/c6cd60b47a10/03245317250-A1M/03245317250-A1M.jpg?ts=1739446871774&w=541&f=auto"/></div>
+            <div class="panel">
+              <div class="row"><div class="card-title">Plegables</div></div>
+              <div class="ro"><div class="card-title2">Buffer</div><div class="card-title3" id="senora-buffer-total">0</div></div>
+              <div class="ro"><div class="card-title2 ">Piso</div><div class="card-title3" id="senora-piso-total">0</div></div>
+              <div class="row"></div>
+              <div class="inputrap"> 
+                <input class="input-linea calc-input" id="senora-input-total" data-side="senora" data-tab="total" inputmode="numeric" placeholder="Unidades"/>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card-face card" id="senora-espana" style="transform: rotateY(180deg);">
+            <div class="photo"><img alt="Señora" src="https://static.pullandbear.net/assets/public/923e/6268/9cef48938b12/c6cd60b47a10/03245317250-A1M/03245317250-A1M.jpg?ts=1739446871774&w=541&f=auto"/></div>
+            <div class="panel">
+              <div class="row"><div class="card-title">Plegables</div></div>
+              <div class="ro"><div class="card-title2">Buffer</div><div class="card-title3" id="senora-buffer-espana">0</div></div>
+              <div class="ro"><div class="card-title2 ">Piso</div><div class="card-title3" id="senora-piso-espana">0</div></div>
+              <div class="row"></div>
+              <div class="inputrap"> 
+                <input class="input-linea calc-input" id="senora-input-espana" data-side="senora" data-tab="espana" inputmode="numeric" placeholder="Unidades"/>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card-face card" id="senora-mexico" style="transform: rotateY(180deg);">
+            <div class="photo"><img alt="Señora" src="https://static.pullandbear.net/assets/public/923e/6268/9cef48938b12/c6cd60b47a10/03245317250-A1M/03245317250-A1M.jpg?ts=1739446871774&w=541&f=auto"/></div>
+            <div class="panel">
+              <div class="row"><div class="card-title">Plegables</div></div>
+              <div class="ro"><div class="card-title2">Buffer</div><div class="card-title3" id="senora-buffer-mexico">0</div></div>
+              <div class="ro"><div class="card-title2 ">Piso</div><div class="card-title3" id="senora-piso-mexico">0</div></div>
+              <div class="row"></div>
+              <div class="inputrap"> 
+                <input class="input-linea calc-input" id="senora-input-mexico" data-side="senora" data-tab="mexico" inputmode="numeric" placeholder="Unidades"/>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="flip-card">
+        <div class="flip-card-inner" id="inner-caballero" style="transform: rotateY(0deg);">
+          
+          <article class="flip-card-face card" id="caballero-total" style="transform: rotateY(0deg); display: block;">
+            <div class="photo"><img alt="Caballero" src="https://static.pullandbear.net/assets/public/0fa4/d009/e2014070b6c7/8d0975323189/03245520826-A1M/03245520826-A1M.jpg?ts=1735567421822&w=1082&f=auto"/></div>
+            <div class="panel">
+              <div class="row"><div class="card-title">Plegables</div></div>
+              <div class="ro"><div class="card-title2">Buffer</div><div class="card-title3" id="caballero-buffer-total">0</div></div>
+              <div class="ro"><div class="card-title2">Piso</div><div class="card-title3" id="caballero-piso-total">0</div></div>
+              <div class="row"></div>
+              <div class="inputWrp">
+                <input class="input-linea calc-input" id="caballero-input-total" data-side="caballero" data-tab="total" inputmode="numeric" placeholder="Unidades"/>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card-face card" id="caballero-espana" style="transform: rotateY(180deg);">
+            <div class="photo"><img alt="Caballero" src="https://static.pullandbear.net/assets/public/0fa4/d009/e2014070b6c7/8d0975323189/03245520826-A1M/03245520826-A1M.jpg?ts=1735567421822&w=1082&f=auto"/></div>
+            <div class="panel">
+              <div class="row"><div class="card-title">Plegables</div></div>
+              <div class="ro"><div class="card-title2">Buffer</div><div class="card-title3" id="caballero-buffer-espana">0</div></div>
+              <div class="ro"><div class="card-title2">Piso</div><div class="card-title3" id="caballero-piso-espana">0</div></div>
+              <div class="row"></div>
+              <div class="inputWrp">
+                <input class="input-linea calc-input" id="caballero-input-espana" data-side="caballero" data-tab="espana" inputmode="numeric" placeholder="Unidades"/>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card-face card" id="caballero-mexico" style="transform: rotateY(180deg);">
+            <div class="photo"><img alt="Caballero" src="https://static.pullandbear.net/assets/public/0fa4/d009/e2014070b6c7/8d0975323189/03245520826-A1M/03245520826-A1M.jpg?ts=1735567421822&w=1082&f=auto"/></div>
+            <div class="panel">
+              <div class="row"><div class="card-title">Plegables</div></div>
+              <div class="ro"><div class="card-title2">Buffer</div><div class="card-title3" id="caballero-buffer-mexico">0</div></div>
+              <div class="ro"><div class="card-title2">Piso</div><div class="card-title3" id="caballero-piso-mexico">0</div></div>
+              <div class="row"></div>
+              <div class="inputWrp">
+                <input class="input-linea calc-input" id="caballero-input-mexico" data-side="caballero" data-tab="mexico" inputmode="numeric" placeholder="Unidades"/>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="save-btn-container">
+      <button id="btn-guardar-pdf" class="btn-guardar">Guardar PDF</button>
+    </div>
+
+  </main>
+
+  <!-- SECCIÓN: GENERADOR QR -->
+  <section id="section-qr" class="money-section">
+    <div class="aco-header">
+        <h2>Generador QR</h2>
+        <h3>POSICIONES</h3>
+    </div>
+  
+    <div class="footer-container" style="padding-top: 15px; border-top: none; display: flex; flex-direction: column; align-items: center; width: 100%;">
+              
+      <div style="display: flex; width: 100%; gap: 20px;"> 
+        <div class="data-group" style="flex: 1;">
+          <label class="aco-label">Apartado</label>
+          <select id="qr-apartado" class="aco-input-text">
+              <option value="01">Señora</option>
+              <option value="02">Caballero</option>
+          </select>
+        </div>
+        <div class="data-group" style="flex: 1;">
+            <label class="aco-label">Posición</label>
+            <input type="number" id="qr-posicion" class="aco-input-text" placeholder="" min="1">
+        </div>
+      </div>
+
+      <div class="save-btn-container" style="width: 100%; margin-top: 15px; margin-bottom: 10px;"> 
+        <button id="btn-generar-qr" class="btn-guardar" style="width: 100%;">Generar Código</button>
+      </div>
+
+      <div id="qr-result-area" style="display: none; flex-direction: column; align-items: center; width: 100%; padding-top: 25px; border-top: 1px solid rgba(0,0,0,0.1);"> 
+        <div id="qrcode-display" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);"></div>
+        <h4 id="qr-resultado-texto" style="font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: 4px; margin-top: 20px;"></h4>
+      </div>
+  
+    </div>
+  </section>
+
+  <section id="manual-section">
+    <div class="counter-card">
+      <div class="counter-title">Cuenta Personas</div>
+      <div id="manual-display">0</div>
+      <div class="counter-controls">
+        <button id="btn-res" class="btn-counter" aria-label="Restar">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </button>
+        <button id="btn-sum" class="btn-counter" aria-label="Sumar">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="section-analisis" class="analysis-section">
+    <div class="analysis-header">
+        <h2>Análisis Cuadro de Merma</h2>
+        <div style="text-align: center; margin-bottom: 30px;">
+          <div style="font-size: 13px; font-weight: 600; color: #000000; letter-spacing: 1px; text-transform: uppercase;">
+              <span id="cm-fecha-hoy"></span> VS - 
+              <input type="number" id="cm-dias-input" class="inline-date-input" value="14" min="1">
+              DÍAS. (<span id="cm-fecha-pasada"></span>)
+          </div>
+      </div>
+    </div>
+
+    <div class="tables-wrapper">
+        <div class="table-container">
+            <div class="table-caption">Global</div>
+            <table class="cm-table">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th class="th-fecha-pasada"></th>
+                        <th class="th-fecha-hoy"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Merma</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="percent"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="percent"><span class="cm-diff"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Importe</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="money"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="money"><span class="cm-diff"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Unidades</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="number"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="number"><span class="cm-diff"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Rank. Marked</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="number"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="number" data-inverse="true"><span class="cm-diff"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Rank. World</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="number"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="number" data-inverse="true"><span class="cm-diff"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="dual-tables">
+            <div class="table-container">
+                <div class="table-caption">Señora</div>
+                <table class="cm-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th class="th-fecha-pasada"></th>
+                            <th class="th-fecha-hoy"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Merma</td>
+                            <td><input class="cm-input past-val" inputmode="decimal" data-type="percent"></td>
+                            <td><input class="cm-input curr-val" inputmode="decimal" data-type="percent"><span class="cm-diff"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Importe</td>
+                            <td><input class="cm-input past-val" inputmode="decimal" data-type="money"></td>
+                            <td><input class="cm-input curr-val" inputmode="decimal" data-type="money"><span class="cm-diff"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Unidades</td>
+                            <td><input class="cm-input past-val" inputmode="decimal" data-type="number"></td>
+                            <td><input class="cm-input curr-val" inputmode="decimal" data-type="number"><span class="cm-diff"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-container">
+                <div class="table-caption">Caballero</div>
+                <table class="cm-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th class="th-fecha-pasada"></th>
+                        <th class="th-fecha-hoy"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Merma</td>
+                            <td><input class="cm-input past-val" inputmode="decimal" data-type="percent"></td>
+                            <td><input class="cm-input curr-val" inputmode="decimal" data-type="percent"><span class="cm-diff"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Importe</td>
+                            <td><input class="cm-input past-val" inputmode="decimal" data-type="money"></td>
+                            <td><input class="cm-input curr-val" inputmode="decimal" data-type="money"><span class="cm-diff"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Unidades</td>
+                            <td><input class="cm-input past-val" inputmode="decimal" data-type="number"></td>
+                            <td><input class="cm-input curr-val" inputmode="decimal" data-type="number"><span class="cm-diff"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="table-caption">Evidencias RFID</div>
+            <table class="cm-table">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th class="th-fecha-pasada"></th>
+                        <th class="th-fecha-hoy"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Probador</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="percent"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="percent"><span class="cm-diff"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Alarmas</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="percent"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="percent"><span class="cm-diff"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Pedestales</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="percent"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="percent"><span class="cm-diff"></span></td>
+                    </tr>
+                    <tr>
+                        <td>PDA</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="percent"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="percent"><span class="cm-diff"></span></td>
+                    </tr>
+                    <tr>
+                      <td>Piso</td>
+                      <td><input class="cm-input past-val" inputmode="decimal" data-type="percent"></td>
+                      <td><input class="cm-input curr-val" inputmode="decimal" data-type="percent"><span class="cm-diff"></span></td>
+                  </tr>
+                  <tr>
+                      <td>Almacén</td>
+                      <td><input class="cm-input past-val" inputmode="decimal" data-type="percent"></td>
+                      <td><input class="cm-input curr-val" inputmode="decimal" data-type="percent"><span class="cm-diff"></span></td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-separator"><span>Procesos</span></div>
+
+        <div class="table-container">
+            <div class="table-caption">Entradas / Puertas</div>
+            <table class="cm-table">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th class="th-fecha-pasada"></th>
+                        <th class="th-fecha-hoy"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Rendimiento</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="percent" data-inverse="true"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="percent" data-inverse="true"><span class="cm-diff"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Uds Pedestales</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="number"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="number"><span class="cm-diff"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Uds Alarmas</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="number"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="number"><span class="cm-diff"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-container">
+            <div class="table-caption">POS / Caja</div>
+            <table class="cm-table">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th class="th-fecha-pasada"></th>
+                        <th class="th-fecha-hoy"></th>  
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tickets</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="percent"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="percent"><span class="cm-diff"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Devoluciones</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="percent"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="percent"><span class="cm-diff"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Manual</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="number"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="number"><span class="cm-diff"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-container">
+            <div class="table-caption">Probadores</div>
+            <table class="cm-table">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th class="th-fecha-pasada"></th>
+                        <th class="th-fecha-hoy"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Unidades</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="number"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="number"><span class="cm-diff"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Porcentaje</td>
+                        <td><input class="cm-input past-val" inputmode="decimal" data-type="percent"></td>
+                        <td><input class="cm-input curr-val" inputmode="decimal" data-type="percent"><span class="cm-diff"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="save-btn-container" style="margin-top: 20px;">
+      <button id="btn-guardar-analisis" class="btn-guardar">Guardar PDF</button>
+    </div>
+  </section>
+
+  <section id="section-recarga" class="money-section">
+    <div class="aco-header">
+        <h2>Recarga ACO</h2>
+        
+    </div>
+    <div class="date-row">
+          <div class="fecha-dinamica" id="recarga-fecha">DD / MM / YYYY</div>
+    </div>
+
+    <div class="aco-money-grid">
+        <div class="col-money">
+            <div class="money-row"><span class="money-label">$1 =</span><input type="text" inputmode="numeric" class="money-input" data-val="1"></div>
+            <div class="money-row"><span class="money-label">$2 =</span><input type="text" inputmode="numeric" class="money-input" data-val="2"></div>
+            <div class="money-row"><span class="money-label">$5 =</span><input type="text" inputmode="numeric" class="money-input" data-val="5"></div>
+            <div class="money-row"><span class="money-label">$10 =</span><input type="text" inputmode="numeric" class="money-input" data-val="10"></div>
+            <div class="money-row"><span class="money-label">$20 =</span><input type="text" inputmode="numeric" class="money-input" data-val="20"></div>
+        </div>
+        <div class="col-money">
+            <div class="money-row"><span class="money-label">$50 =</span><input type="text" inputmode="numeric" class="money-input" data-val="50"></div>
+            <div class="money-row"><span class="money-label">$100 =</span><input type="text" inputmode="numeric" class="money-input" data-val="100"></div>
+            <div class="money-row"><span class="money-label">$200 =</span><input type="text" inputmode="numeric" class="money-input" data-val="200"></div>
+            <div class="money-row"><span class="money-label">$500 =</span><input type="text" inputmode="numeric" class="money-input" data-val="500"></div>
+            <div class="money-row"><span class="money-label">$1,000=</span><input type="text" inputmode="numeric" class="money-input" data-val="1000"></div>
+        </div>
+    </div>
+
+    <div class="footer-container">
+        <div class="total-section">
+            <div class="total-display">Total = <span id="recarga-total">$0</span></div>
+            <div class="small-calc">
+                <span>Importe reflejado:</span>
+                <div class="input-money-wrapper"><span class="money-symbol">$</span><input type="text" inputmode="numeric" id="recarga-previo" class="small-input" placeholder="0"></div>
+            </div>
+            <div class="small-calc">
+                <span>Diferencia:</span>
+                <span id="recarga-diferencia" class="diff-display">$0</span>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <section id="section-aco" class="money-section">
+    <div class="aco-header">
+        <h2>Fondo físico ACO</h2>
+        
+    </div>
+    <div class="date-row">
+          <div class="fecha-dinamica" id="aco-fecha">DD / MM / YYYY</div>
+    </div>
+    <div class="personal-data-row">
+        <div class="data-group name-group">
+            <label class="aco-label">Nombre Completo</label>
+            <input type="text" class="aco-input-text" id="aco-nombre" placeholder="JUAN PEREZ" autocomplete="off">
+        </div>
+        <div class="data-group code-group">
+            <label class="aco-label">Codigo</label>
+            <input type="text" inputmode="numeric" class="aco-input-text" id="aco-codigo" placeholder="112233" maxlength="6">
+        </div>
+    </div>
+
+    <div class="aco-money-grid">
+        <div class="col-money">
+            <div class="money-row"><span class="money-label">$1 =</span><input type="text" inputmode="numeric" class="money-input" data-val="1"></div>
+            <div class="money-row"><span class="money-label">$2 =</span><input type="text" inputmode="numeric" class="money-input" data-val="2"></div>
+            <div class="money-row"><span class="money-label">$5 =</span><input type="text" inputmode="numeric" class="money-input" data-val="5"></div>
+            <div class="money-row"><span class="money-label">$10 =</span><input type="text" inputmode="numeric" class="money-input" data-val="10"></div>
+            <div class="money-row"><span class="money-label">$20 =</span><input type="text" inputmode="numeric" class="money-input" data-val="20"></div>
+        </div>
+        <div class="col-money">
+            <div class="money-row"><span class="money-label">$50 =</span><input type="text" inputmode="numeric" class="money-input" data-val="50"></div>
+            <div class="money-row"><span class="money-label">$100 =</span><input type="text" inputmode="numeric" class="money-input" data-val="100"></div>
+            <div class="money-row"><span class="money-label">$200 =</span><input type="text" inputmode="numeric" class="money-input" data-val="200"></div>
+            <div class="money-row"><span class="money-label">$500 =</span><input type="text" inputmode="numeric" class="money-input" data-val="500"></div>
+            <div class="money-row"><span class="money-label">$1,000=</span><input type="text" inputmode="numeric" class="money-input" data-val="1000"></div>
+        </div>
+    </div>
+
+    <div class="footer-container">
+      <div class="total-section">
+          <div class="total-display">Total = <span id="aco-total">$0</span></div>
+          <div class="small-calc">
+              <span>Fondo previo:</span>
+              <div class="input-money-wrapper"><span class="money-symbol">$</span><input type="text" inputmode="numeric" id="aco-previo" class="small-input" placeholder="0"></div>
+          </div>
+          <div class="small-calc">
+              <span>Diferencia:</span>
+              <span id="aco-diferencia" class="diff-display">$0</span>
+          </div>
+      </div>
+    </div>
+  
+    <div class="save-btn-container" style="margin-top: 40px; margin-bottom: 0px;">
+      <button id="btn-guardar-aco" class="btn-guardar">Guardar PDF</button>
+    </div>
+  </section>
+  
+  <!-- MODAL DE INICIO DE SESIÓN -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="background-color: #ffffff; border: 1px solid rgba(0,0,0,0.1); border-radius: 14px;">
+        <div class="modal-header" style="border-bottom: 1px solid rgba(0,0,0,0.05); position: relative;">
+          <h5 class="modal-title w-100 text-center" id="loginModalLabel" style="font-family: 'Playfair Display', serif; color: black;">Acceso a Dashboard</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; right: 20px;"></button>
+        </div>
+        <div class="modal-body text-center" style="padding: 30px;">
+          <form id="loginForm">
+            
+            <!-- PASO 1: ID Y NIP NORMAL -->
+            <div id="login-step-1">
+                <div class="mb-4 d-flex flex-column align-items-center">
+                  <label class="form-label aco-label" style="color: #000000;">Número de Empleado</label>
+                  <input type="number" class="form-control aco-input-text text-center" id="empNumero" placeholder="123456" required style="background: transparent; color: black; border-bottom: 1px solid rgba(0,0,0,0.2) !important; border-radius: 0; padding: 5px; width: 50%; min-width: 130px; margin: 0 auto; box-shadow: none;">
+                </div>
+                <div class="mb-4 d-flex flex-column align-items-center">
+                  <label class="form-label aco-label" style="color: #000000;">NIP</label>
+                  <input type="password" class="form-control aco-input-text text-center" id="empNip" maxlength="6" style="background: transparent; color: black; border-bottom: 1px solid rgba(0,0,0,0.2) !important; border-radius: 0; padding: 5px; width: 50%; min-width: 130px; margin: 0 auto; box-shadow: none;">
+                </div>
+                <button type="submit" class="btn-guardar" style="width: 50%; margin-top: 10px;">Ingresar</button>
+            </div>
+
+            <!-- PASO 2: DEFINIR CONTRASEÑA POR PRIMERA VEZ -->
+            <div id="login-step-2" style="display: none;">
+                <p style="font-size: 13px; color: #666; font-weight: 600; margin-bottom: 20px;">Es tu primera vez ingresando. Define tu NIP de 6 dígitos:</p>
+                <div class="mb-4 d-flex flex-column align-items-center">
+                  <label class="form-label aco-label" style="color: #000000;">Nuevo NIP</label>
+                  <input type="password" class="form-control aco-input-text text-center" id="newNip1" maxlength="6" style="background: transparent; color: black; border-bottom: 1px solid rgba(0,0,0,0.2) !important; border-radius: 0; padding: 5px; width: 50%; min-width: 130px; margin: 0 auto; box-shadow: none;">
+                </div>
+                <div class="mb-4 d-flex flex-column align-items-center">
+                  <label class="form-label aco-label" style="color: #000000;">Confirmar NIP</label>
+                  <input type="password" class="form-control aco-input-text text-center" id="newNip2" maxlength="6" style="background: transparent; color: black; border-bottom: 1px solid rgba(0,0,0,0.2) !important; border-radius: 0; padding: 5px; width: 50%; min-width: 130px; margin: 0 auto; box-shadow: none;">
+                </div>
+                <button type="button" id="btn-ingresar-2" class="btn-guardar" style="width: 50%; margin-top: 10px;">Guardar e Ingresar</button>
+            </div>
+
+            <div id="loginError" style="color: var(--red-alert); font-size: 13px; display: none; text-align: center; margin-top: 15px;">Datos incorrectos o sin permisos.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIBRERÍAS EXTERNAS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- LIBRERÍAS DE FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
+  <!-- ENLACE AL ARCHIVO JS -->
+  <script src="js/app.js"></script>
+</body>
+</html>
