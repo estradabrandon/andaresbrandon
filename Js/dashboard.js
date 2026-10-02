@@ -17,7 +17,7 @@ const secondaryApp = firebase.initializeApp(firebaseConfig, "SecondaryApp");
 /* === VERIFICAR SESIÓN ACTIVA Y SEGURIDAD DE FIREBASE === */
 const sesionRaw = sessionStorage.getItem('sesionActiva');
 if (!sesionRaw) {
-    window.location.href = 'index.html';
+    window.location.href = 'Index.html';
 }
 const sesionEncargado = JSON.parse(sesionRaw);
 
@@ -26,7 +26,7 @@ firebase.auth().onAuthStateChanged((user) => {
     if (!user) {
         // Si Firebase dice que no hay nadie logueado, lo regresamos al index
         sessionStorage.removeItem('sesionActiva');
-        window.location.href = 'index.html';
+        window.location.href = 'Index.html';
     }
 });
 
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById('btn-cerrar-sesion').addEventListener('click', () => {
         sessionStorage.removeItem('sesionActiva');
-        window.location.href = 'index.html';
+        window.location.href = 'Index.html';
     });
 
     // Ejecutar mantenimiento silencioso de registros
